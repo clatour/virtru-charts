@@ -133,3 +133,10 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      {{- if .Values.topologySpreadConstraints }}
+      topologySpreadConstraints:
+        {{- toYaml .Values.topologySpreadConstraints | nindent 8 }}
+        labelSelector:
+          matchLabels:
+            {{- include "cse.selectorLabels" . | nindent 12 }}
+      {{- end }}
